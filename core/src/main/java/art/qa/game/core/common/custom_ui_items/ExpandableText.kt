@@ -1,4 +1,4 @@
-package art.qa.game.core
+package art.qa.game.core.common.custom_ui_items
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
@@ -20,12 +20,12 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import art.qa.game.DOT
-import art.qa.game.ONE
-import art.qa.game.SHOW_LESS_EN
-import art.qa.game.SHOW_MORE_EN
-import art.qa.game.THREE
-import art.qa.game.ZERO
+import art.qa.game.core.common.DOT
+import art.qa.game.core.common.ONE
+import art.qa.game.core.common.SHOW_LESS_EN
+import art.qa.game.core.common.SHOW_MORE_EN
+import art.qa.game.core.common.THREE
+import art.qa.game.core.common.ZERO
 
 @Composable
 fun ExpandableText(

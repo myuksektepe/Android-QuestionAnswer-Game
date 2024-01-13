@@ -1,4 +1,4 @@
-package art.qa.game.core
+package art.qa.game.core.common.custom_ui_items
 
 import android.view.View
 import androidx.compose.runtime.Composable

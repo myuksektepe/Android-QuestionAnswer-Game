@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.unit.dp
 import art.qa.game.feature.question_answer.domain.model.AnswerItemModel
-import art.qa.game.ui.theme.ColorPalate
+import art.qa.game.core.ui.theme.ColorPalate
 
 @Composable
 fun AnswerItem(

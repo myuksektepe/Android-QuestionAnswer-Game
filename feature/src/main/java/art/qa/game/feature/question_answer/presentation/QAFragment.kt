@@ -10,7 +10,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import art.qa.game.feature.question_answer.presentation.ui.QuestionAnswer
-import art.qa.game.ui.theme.ArtQAGameTheme
+import art.qa.game.core.ui.theme.ArtQAGameTheme
 
 class QAFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package art.qa.game
+package art.qa.game.core.common
 
 const val DOT = '.'
 const val THREE_DOT = "..."

@@ -1,4 +1,4 @@
-package art.qa.game.ui.theme
+package art.qa.game.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
