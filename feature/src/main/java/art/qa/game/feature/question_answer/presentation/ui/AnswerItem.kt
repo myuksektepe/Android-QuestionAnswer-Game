@@ -19,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.unit.dp
-import art.qa.game.feature.question_answer.domain.model.AnswerItemModel
 import art.qa.game.core.ui.theme.ColorPalate
+import art.qa.game.feature.question_answer.domain.model.AnswerItemModel
 
 @Composable
 fun AnswerItem(
@@ -32,15 +32,18 @@ fun AnswerItem(
     isCorrect: Boolean?,
     setIsCorrect: (Boolean?) -> Unit
 ) {
+
+    fun onAnswerClicked() = run {
+        onAnswerClick(answerItemModel.isCorrect)
+        setSelected(answerItemModel.text)
+        setIsCorrect(answerItemModel.isCorrect)
+    }
+
     Surface(
         shape = MaterialTheme.shapes.medium,
         shadowElevation = 8.dp,
         modifier = modifier
-            .clickable {
-                onAnswerClick(answerItemModel.isCorrect)
-                setSelected(answerItemModel.text)
-                setIsCorrect(answerItemModel.isCorrect)
-            }
+            .clickable { onAnswerClicked() }
             .fillMaxSize()
     ) {
         Row(
@@ -54,7 +57,7 @@ fun AnswerItem(
         ) {
             RadioButton(
                 selected = selected == answerItemModel.text,
-                onClick = {},
+                onClick = { onAnswerClicked() },
                 colors = RadioButtonDefaults.colors(
                     selectedColor = DarkGray
                 )
@@ -69,8 +72,9 @@ fun AnswerItem(
     Spacer(modifier = modifier.height(16.dp))
 }
 
-@Composable
-fun getCorrectAnswerBg() = if (isSystemInDarkTheme()) ColorPalate.Dark.CorrectAnswerBg else ColorPalate.Light.CorrectAnswerBg
 
 @Composable
-fun getWrongAnswerBg() = if (isSystemInDarkTheme()) ColorPalate.Dark.WrongAnswerBg else ColorPalate.Light.WrongAnswerBg
+private fun getCorrectAnswerBg() = if (isSystemInDarkTheme()) ColorPalate.Dark.CorrectAnswerBg else ColorPalate.Light.CorrectAnswerBg
+
+@Composable
+private fun getWrongAnswerBg() = if (isSystemInDarkTheme()) ColorPalate.Dark.WrongAnswerBg else ColorPalate.Light.WrongAnswerBg
