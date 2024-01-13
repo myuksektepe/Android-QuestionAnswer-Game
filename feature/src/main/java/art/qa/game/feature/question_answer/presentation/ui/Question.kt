@@ -10,9 +10,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import art.qa.game.FOUR
+import art.qa.game.SPACE
+import art.qa.game.THREE_DOT
+import art.qa.game.core.ExpandableText
 import art.qa.game.feature.question_answer.domain.model.QuestionModel
 
 @Composable
@@ -26,12 +30,14 @@ fun Question(
         style = MaterialTheme.typography.titleLarge,
     )
     questionModel.description?.let {
-        Text(
-            text = it,
+        val context = LocalContext.current
+        ExpandableText(
             modifier = modifier.padding(bottom = 16.dp),
+            text = it,
             style = MaterialTheme.typography.titleMedium,
-            maxLines = 3,
-            overflow = TextOverflow.Ellipsis
+            collapsedMaxLine = FOUR,
+            showMoreText = "$THREE_DOT$SPACE${context.getString(art.qa.game.core.R.string.showMore)}",
+            showLessText = "$SPACE${context.getString(art.qa.game.core.R.string.showLess)}",
         )
     }
     ElevatedCard(
