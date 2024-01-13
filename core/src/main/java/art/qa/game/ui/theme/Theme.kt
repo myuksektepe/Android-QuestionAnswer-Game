@@ -75,8 +75,6 @@ fun ArtQAGameTheme(
         }
     }
 
-    val CorrectAnswerBg = if (isSystemInDarkTheme()) ColorPalate.Dark.CorrectAnswerBg else ColorPalate.Light.CorrectAnswerBg
-
     MaterialTheme(
         colorScheme = colorScheme,
         typography = if (darkTheme) DarkTypography else LightTypography,

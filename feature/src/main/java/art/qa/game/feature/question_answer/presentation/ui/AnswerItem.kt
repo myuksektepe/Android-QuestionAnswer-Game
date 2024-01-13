@@ -11,10 +11,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.unit.dp
 import art.qa.game.feature.question_answer.domain.model.AnswerItemModel
@@ -53,6 +55,9 @@ fun AnswerItem(
             RadioButton(
                 selected = selected == answerItemModel.text,
                 onClick = {},
+                colors = RadioButtonDefaults.colors(
+                    selectedColor = DarkGray
+                )
             )
             Text(
                 text = answerItemModel.text,

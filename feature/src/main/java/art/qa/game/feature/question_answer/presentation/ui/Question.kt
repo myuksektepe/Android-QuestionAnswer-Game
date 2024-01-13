@@ -3,7 +3,8 @@ package art.qa.game.feature.question_answer.presentation.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,8 +34,12 @@ fun Question(
             overflow = TextOverflow.Ellipsis
         )
     }
-    Card (
-        modifier = modifier.fillMaxSize()
+    ElevatedCard(
+        modifier = modifier
+            .fillMaxSize(),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 8.dp
+        ),
     ) {
         Image(
             modifier = modifier.fillMaxSize(),
