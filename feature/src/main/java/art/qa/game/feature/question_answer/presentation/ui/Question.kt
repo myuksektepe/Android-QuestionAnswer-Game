@@ -22,13 +22,13 @@ fun Question(
     Text(
         text = questionModel.title,
         modifier = modifier.padding(bottom = 8.dp),
-        style = MaterialTheme.typography.labelLarge,
+        style = MaterialTheme.typography.titleLarge,
     )
     questionModel.description?.let {
         Text(
             text = it,
             modifier = modifier.padding(bottom = 16.dp),
-            style = MaterialTheme.typography.labelSmall,
+            style = MaterialTheme.typography.titleMedium,
             maxLines = 3,
             overflow = TextOverflow.Ellipsis
         )

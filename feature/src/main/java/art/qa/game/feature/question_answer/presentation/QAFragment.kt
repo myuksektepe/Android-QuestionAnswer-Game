@@ -10,6 +10,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import art.qa.game.feature.question_answer.presentation.ui.QuestionAnswer
+import art.qa.game.ui.theme.ArtQAGameTheme
 
 class QAFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,17 +25,19 @@ class QAFragment : Fragment() {
             setContent {
                 val viewModel = viewModel<QAViewModel>()
                 val questionModel = viewModel.question
-                QuestionAnswer(
-                    modifier = Modifier,
-                    questionModel = questionModel,
-                    onAnswerClick = { isCorrect ->
-                        if (isCorrect) {
-                            Toast.makeText(requireContext(), "Answer is correct!", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(requireContext(), "Naaah!", Toast.LENGTH_SHORT).show()
+                ArtQAGameTheme {
+                    QuestionAnswer(
+                        modifier = Modifier,
+                        questionModel = questionModel,
+                        onAnswerClick = { isCorrect ->
+                            if (isCorrect) {
+                                Toast.makeText(requireContext(), "Answer is correct!", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(requireContext(), "Naaah!", Toast.LENGTH_SHORT).show()
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
 

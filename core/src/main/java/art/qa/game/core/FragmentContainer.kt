@@ -22,7 +22,6 @@ fun FragmentContainer(
 ) {
     val containerId by rememberSaveable { mutableIntStateOf(View.generateViewId()) }
     var initialized by rememberSaveable { mutableStateOf(false) }
-
     AndroidView(
         modifier = modifier,
         factory = { context ->

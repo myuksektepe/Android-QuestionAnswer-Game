@@ -20,6 +20,7 @@ fun QuestionAnswer(
     onAnswerClick: (Boolean) -> Unit
 ) {
     val (selected, setSelected) = remember { mutableStateOf("") }
+    val (isCorrect, setIsCorrect) = remember { mutableStateOf<Boolean?>(null) }
 
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -31,7 +32,7 @@ fun QuestionAnswer(
             Spacer(modifier = modifier.height(16.dp))
         }
         items(questionModel.answers.answers) { answer ->
-            AnswerItem(modifier, answer, onAnswerClick, selected, setSelected)
+            AnswerItem(modifier, answer, onAnswerClick, selected, setSelected, isCorrect, setIsCorrect)
         }
     }
 }
