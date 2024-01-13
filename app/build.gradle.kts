@@ -60,7 +60,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.fragment.ktx)
-    implementation(libs.androidx.activity.ktx)
 
     // Compose
     implementation(libs.androidx.activity.compose)

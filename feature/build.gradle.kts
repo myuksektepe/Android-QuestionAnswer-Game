@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlinx-serialization")
 }
 
 android {
@@ -56,6 +57,12 @@ dependencies {
 
     // Coil
     implementation(libs.coil.compose)
+
+    // Ktor
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.cio)
+    implementation(libs.ktor.contentNegotiation)
+    implementation(libs.ktor.json)
 
     // Tests
     /*
