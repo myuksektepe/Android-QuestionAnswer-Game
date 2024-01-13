@@ -15,7 +15,7 @@
         android:theme="@style/Theme.ArtQAGame"
         tools:targetApi="31">
         <activity
-            android:name=".feature.question_answer.presentation.QAActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ArtQAGame">
             <intent-filter>
