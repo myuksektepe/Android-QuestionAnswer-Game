@@ -19,6 +19,7 @@ import art.qa.game.core.common.THREE_DOT
 import art.qa.game.core.R
 import art.qa.game.core.common.custom_ui_items.ExpandableText
 import art.qa.game.feature.question_answer.domain.model.QuestionModel
+import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun Question(
@@ -51,7 +52,7 @@ fun Question(
         Image(
             modifier = modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
-            painter = painterResource(id = questionModel.image),
+            painter = rememberAsyncImagePainter(questionModel.image),
             contentDescription = questionModel.title
         )
     }

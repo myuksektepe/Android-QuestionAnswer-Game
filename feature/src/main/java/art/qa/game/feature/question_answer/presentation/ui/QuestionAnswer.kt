@@ -31,7 +31,7 @@ fun QuestionAnswer(
             Question(modifier, questionModel = questionModel)
             Spacer(modifier = modifier.height(16.dp))
         }
-        items(questionModel.answers.answers) { answer ->
+        items(questionModel.answers) { answer ->
             AnswerItem(modifier, answer, onAnswerClick, selected, setSelected, isCorrect, setIsCorrect)
         }
     }
