@@ -17,28 +17,29 @@ import art.qa.game.feature.question_answer.domain.model.QuestionModel
 @Composable
 fun QuestionAnswer(
     modifier: Modifier,
-    questionModel: QuestionModel,
+    questionModel: QuestionModel?,
     onAnswerClick: (Boolean) -> Unit
 ) {
     val (selected, setSelected) = remember { mutableStateOf("") }
     val (isCorrect, setIsCorrect) = remember { mutableStateOf<Boolean?>(null) }
-
-    LazyColumn(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .padding(start = 16.dp, end = 16.dp)
-            .fillMaxSize()
-    ) {
-        item {
-            Spacer(modifier = modifier.height(16.dp))
-            Question(modifier, questionModel = questionModel)
-            Spacer(modifier = modifier.height(16.dp))
-        }
-        items(questionModel.answers) { answer ->
-            AnswerItem(modifier, answer, onAnswerClick, selected, setSelected, isCorrect, setIsCorrect)
-        }
-        item {
-            Spacer(modifier = modifier.height(16.dp))
+    questionModel?.let {
+        LazyColumn(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+                .padding(start = 16.dp, end = 16.dp)
+                .fillMaxSize()
+        ) {
+            item {
+                Spacer(modifier = modifier.height(16.dp))
+                Question(modifier, questionModel = it)
+                Spacer(modifier = modifier.height(16.dp))
+            }
+            items(it.answers) { answer ->
+                AnswerItem(modifier, answer, onAnswerClick, selected, setSelected, isCorrect, setIsCorrect)
+            }
+            item {
+                Spacer(modifier = modifier.height(16.dp))
+            }
         }
     }
 }

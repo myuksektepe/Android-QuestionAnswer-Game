@@ -42,7 +42,7 @@ class QAViewModel : ViewModel() {
 
     val question by mutableStateOf(
         runBlocking {
-            fetchQuestions().questions.random()
+            fetchQuestions()?.questions?.random()
         }
     )
 }
