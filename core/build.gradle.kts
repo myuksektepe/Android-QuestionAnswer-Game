@@ -52,6 +52,8 @@ dependencies {
     implementation(libs.ktor.cio)
     implementation(libs.ktor.contentNegotiation)
     implementation(libs.ktor.json)
+    implementation(libs.ktor.logging)
+    implementation(libs.ktor.loggingJvm)
 
     // Tests
     /*

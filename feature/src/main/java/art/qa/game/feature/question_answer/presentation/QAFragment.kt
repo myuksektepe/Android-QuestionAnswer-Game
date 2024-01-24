@@ -6,9 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
@@ -27,19 +24,16 @@ class QAFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                val viewModel = viewModel<QAViewModel>()
-                val questionModel by remember {
-                    mutableStateOf(
-                        viewModel.question
-                    )
-                }
+                val qaViewModel = viewModel<QAViewModel>()
+                qaViewModel.getQuestion()
 
                 ArtQAGameTheme {
                     QuestionAnswer(
                         modifier = Modifier.fillMaxSize(),
-                        questionModel = questionModel,
+                        viewModel = qaViewModel,
                         onAnswerClick = { isCorrect ->
                             if (isCorrect) {
+                                qaViewModel.getQuestion()
                                 Toast.makeText(requireContext(), "Answer is correct!", Toast.LENGTH_SHORT).show()
                             } else {
                                 Toast.makeText(requireContext(), "Naaah!", Toast.LENGTH_SHORT).show()
