@@ -1,6 +1,7 @@
 package art.qa.game.feature.question_answer.presentation.ui
 
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,14 +26,19 @@ fun QuestionAnswer(
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .padding(32.dp)
+            .padding(start = 16.dp, end = 16.dp)
+            .fillMaxSize()
     ) {
         item {
+            Spacer(modifier = modifier.height(16.dp))
             Question(modifier, questionModel = questionModel)
             Spacer(modifier = modifier.height(16.dp))
         }
         items(questionModel.answers) { answer ->
             AnswerItem(modifier, answer, onAnswerClick, selected, setSelected, isCorrect, setIsCorrect)
+        }
+        item {
+            Spacer(modifier = modifier.height(16.dp))
         }
     }
 }

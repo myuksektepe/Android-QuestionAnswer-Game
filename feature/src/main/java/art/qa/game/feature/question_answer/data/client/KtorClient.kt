@@ -10,14 +10,13 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 import io.ktor.serialization.kotlinx.json.json
 
-suspend fun main() {
-    val client = HttpClient(CIO) {
-        install(ContentNegotiation) {
-            json()
-        }
+val client = HttpClient(CIO) {
+    install(ContentNegotiation) {
+        json()
     }
+}
+
+suspend fun fetchQuestions(): QuestionsModel {
     val response: HttpResponse = client.get(API_URL)
-    val questions: QuestionsModel = response.body()
-    System.out.println(questions)
-    client.close()
+    return response.body<QuestionsModel>()
 }

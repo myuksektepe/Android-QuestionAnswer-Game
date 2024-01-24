@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
-import art.qa.game.feature.question_answer.presentation.ui.QuestionAnswer
 import art.qa.game.core.ui.theme.ArtQAGameTheme
+import art.qa.game.feature.question_answer.presentation.ui.QuestionAnswer
 
 class QAFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,10 +28,15 @@ class QAFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 val viewModel = viewModel<QAViewModel>()
-                val questionModel = viewModel.question
+                val questionModel by remember {
+                    mutableStateOf(
+                        viewModel.question
+                    )
+                }
+
                 ArtQAGameTheme {
                     QuestionAnswer(
-                        modifier = Modifier,
+                        modifier = Modifier.fillMaxSize(),
                         questionModel = questionModel,
                         onAnswerClick = { isCorrect ->
                             if (isCorrect) {

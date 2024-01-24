@@ -4,12 +4,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import art.qa.game.feature.question_answer.data.client.fetchQuestions
 import art.qa.game.feature.question_answer.domain.model.AnswerItemModel
 import art.qa.game.feature.question_answer.domain.model.QuestionModel
+import kotlinx.coroutines.runBlocking
 
 class QAViewModel : ViewModel() {
 
-    var question by mutableStateOf(
+    var questionStatic by mutableStateOf(
         QuestionModel(
             id = 1,
             image = "https://mdl.artvee.com/ft/600162sl.jpg",
@@ -36,4 +38,11 @@ class QAViewModel : ViewModel() {
         )
     )
         private set
+
+
+    val question by mutableStateOf(
+        runBlocking {
+            fetchQuestions().questions.random()
+        }
+    )
 }

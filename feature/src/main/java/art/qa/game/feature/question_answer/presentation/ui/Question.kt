@@ -1,6 +1,5 @@
 package art.qa.game.feature.question_answer.presentation.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CardDefaults
@@ -11,15 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import art.qa.game.core.R
 import art.qa.game.core.common.FOUR
 import art.qa.game.core.common.SPACE
 import art.qa.game.core.common.THREE_DOT
-import art.qa.game.core.R
 import art.qa.game.core.common.custom_ui_items.ExpandableText
 import art.qa.game.feature.question_answer.domain.model.QuestionModel
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
 
 @Composable
 fun Question(
@@ -49,10 +47,10 @@ fun Question(
             defaultElevation = 8.dp
         ),
     ) {
-        Image(
+        AsyncImage(
+            model = questionModel.image,
             modifier = modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
-            painter = rememberAsyncImagePainter(questionModel.image),
             contentDescription = questionModel.title
         )
     }
