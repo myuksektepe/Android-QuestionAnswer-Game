@@ -13,6 +13,10 @@ import kotlinx.coroutines.launch
 
 class QAViewModel : ViewModel() {
 
+    init {
+        getQuestion()
+    }
+
     private val questionModelMSF: MutableStateFlow<FlowState<QuestionModel?>> = MutableStateFlow(FlowState.Loading)
     val questionsModel: StateFlow<FlowState<QuestionModel?>> get() = questionModelMSF
 

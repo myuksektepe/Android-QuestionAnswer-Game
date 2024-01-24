@@ -25,7 +25,6 @@ class QAFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 val qaViewModel = viewModel<QAViewModel>()
-                qaViewModel.getQuestion()
 
                 ArtQAGameTheme {
                     QuestionAnswer(

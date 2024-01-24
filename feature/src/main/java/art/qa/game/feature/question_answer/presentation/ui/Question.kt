@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import art.qa.game.core.R
 import art.qa.game.core.common.FOUR
@@ -28,6 +29,7 @@ fun Question(
         text = questionModel.title,
         modifier = modifier.padding(bottom = 8.dp),
         style = MaterialTheme.typography.titleLarge,
+        textAlign = TextAlign.Center
     )
     questionModel.description?.let {
         val context = LocalContext.current
