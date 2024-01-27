@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
@@ -13,7 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -28,8 +29,9 @@ fun QuestionAnswer(
     viewModel: QAViewModel,
     onAnswerClick: (Boolean) -> Unit
 ) {
-    val (selected, setSelected) = remember { mutableStateOf(EMPTY) }
-    val (isCorrect, setIsCorrect) = remember { mutableStateOf<Boolean?>(null) }
+
+    val (selected, setSelected) = rememberSaveable { mutableStateOf(EMPTY) }
+    val (isCorrect, setIsCorrect) = rememberSaveable { mutableStateOf<Boolean?>(null) }
     val result by viewModel.questionsModel.collectAsStateWithLifecycle()
 
     when (result) {
@@ -62,6 +64,7 @@ fun QuestionAnswer(
                     modifier = modifier
                         .padding(start = 16.dp, end = 16.dp)
                         .fillMaxSize()
+                        .safeContentPadding(),
                 ) {
                     item {
                         Spacer(modifier = modifier.height(16.dp))
@@ -69,7 +72,15 @@ fun QuestionAnswer(
                         Spacer(modifier = modifier.height(16.dp))
                     }
                     items(questionModel.answers) { answer ->
-                        AnswerItem(modifier, answer, onAnswerClick, selected, setSelected, isCorrect, setIsCorrect)
+                        AnswerItem(
+                            modifier = modifier,
+                            answerItemModel = answer,
+                            onAnswerClick = onAnswerClick,
+                            selected = selected,
+                            setSelected = setSelected,
+                            isCorrect = isCorrect,
+                            setIsCorrect = setIsCorrect
+                        )
                     }
                     item {
                         Spacer(modifier = modifier.height(16.dp))

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
@@ -33,9 +32,6 @@ class QAFragment : Fragment() {
                         onAnswerClick = { isCorrect ->
                             if (isCorrect) {
                                 qaViewModel.getQuestion()
-                                Toast.makeText(requireContext(), "Answer is correct!", Toast.LENGTH_SHORT).show()
-                            } else {
-                                Toast.makeText(requireContext(), "Naaah!", Toast.LENGTH_SHORT).show()
                             }
                         }
                     )
