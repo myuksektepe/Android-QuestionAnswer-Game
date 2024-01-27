@@ -13,25 +13,24 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import art.qa.game.core.common.EMPTY
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import art.qa.game.core.domain.model.FlowState
-import art.qa.game.feature.question_answer.presentation.QAViewModel
+import art.qa.game.feature.question_answer.presentation.QuestionAnswerViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun QuestionAnswer(
     modifier: Modifier,
-    viewModel: QAViewModel,
-    onAnswerClick: (Boolean) -> Unit
+    viewModel: QuestionAnswerViewModel = viewModel()
 ) {
 
-    val (selected, setSelected) = rememberSaveable { mutableStateOf(EMPTY) }
-    val (isCorrect, setIsCorrect) = rememberSaveable { mutableStateOf<Boolean?>(null) }
     val result by viewModel.questionsModel.collectAsStateWithLifecycle()
 
     when (result) {
@@ -71,15 +70,24 @@ fun QuestionAnswer(
                         Question(modifier, questionModel = questionModel)
                         Spacer(modifier = modifier.height(16.dp))
                     }
-                    items(questionModel.answers) { answer ->
+                    items(
+                        key = { answer -> answer.id },
+                        items = questionModel.answers
+                    ) { answer ->
                         AnswerItem(
                             modifier = modifier,
-                            answerItemModel = answer,
-                            onAnswerClick = onAnswerClick,
-                            selected = selected,
-                            setSelected = setSelected,
-                            isCorrect = isCorrect,
-                            setIsCorrect = setIsCorrect
+                            answer = answer,
+                            onAnswerClick = { answer ->
+                                viewModel.selectedAnswer.value = answer
+                                if (answer.isCorrect) {
+                                    viewModel.viewModelScope.launch(Dispatchers.IO) {
+                                        delay(1000)
+                                        viewModel.clearSelectedAnswer()
+                                        viewModel.getQuestion()
+                                    }
+                                }
+                            },
+                            selectedAnswer = viewModel.selectedAnswer.value,
                         )
                     }
                     item {

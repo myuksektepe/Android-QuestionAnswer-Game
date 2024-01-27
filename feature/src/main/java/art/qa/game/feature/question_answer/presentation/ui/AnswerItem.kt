@@ -25,45 +25,35 @@ import art.qa.game.feature.question_answer.domain.model.AnswerItemModel
 @Composable
 fun AnswerItem(
     modifier: Modifier,
-    answerItemModel: AnswerItemModel,
-    onAnswerClick: (Boolean) -> Unit,
-    selected: String,
-    setSelected: (String) -> Unit,
-    isCorrect: Boolean?,
-    setIsCorrect: (Boolean?) -> Unit
+    answer: AnswerItemModel,
+    onAnswerClick: (AnswerItemModel) -> Unit,
+    selectedAnswer: AnswerItemModel?
 ) {
-
-    fun onAnswerClicked() = run {
-        onAnswerClick(answerItemModel.isCorrect)
-        setSelected(answerItemModel.text)
-        setIsCorrect(answerItemModel.isCorrect)
-    }
-
     Surface(
         shape = MaterialTheme.shapes.medium,
         shadowElevation = 8.dp,
         modifier = modifier
-            .clickable { onAnswerClicked() }
+            .clickable { onAnswerClick(answer) }
             .fillMaxSize()
     ) {
         Row(
             modifier = modifier
                 .background(
-                    color = if (selected == answerItemModel.text) {
-                        if (isCorrect == true) getCorrectAnswerBg() else getWrongAnswerBg()
+                    color = if (selectedAnswer?.text == answer.text) {
+                        if (selectedAnswer.isCorrect) getCorrectAnswerBg() else getWrongAnswerBg()
                     } else Transparent,
                     shape = RoundedCornerShape(4.dp)
                 )
         ) {
             RadioButton(
-                selected = selected == answerItemModel.text,
-                onClick = { onAnswerClicked() },
+                selected = selectedAnswer?.text == answer.text,
+                onClick = { onAnswerClick(answer) },
                 colors = RadioButtonDefaults.colors(
                     selectedColor = DarkGray
                 )
             )
             Text(
-                text = answerItemModel.text,
+                text = answer.text,
                 modifier = modifier.padding(all = 16.dp),
                 style = MaterialTheme.typography.bodyMedium
             )

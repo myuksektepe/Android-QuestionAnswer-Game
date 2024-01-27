@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.viewmodel.compose.viewModel
 import art.qa.game.core.ui.theme.ArtQAGameTheme
 import art.qa.game.feature.question_answer.presentation.ui.QuestionAnswer
 
@@ -23,17 +22,9 @@ class QAFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                val qaViewModel = viewModel<QAViewModel>()
-
                 ArtQAGameTheme {
                     QuestionAnswer(
-                        modifier = Modifier.fillMaxSize(),
-                        viewModel = qaViewModel,
-                        onAnswerClick = { isCorrect ->
-                            if (isCorrect) {
-                                qaViewModel.getQuestion()
-                            }
-                        }
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
             }
